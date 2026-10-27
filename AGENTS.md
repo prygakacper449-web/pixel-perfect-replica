@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep uploaded book artwork in Lovable Assets and reference its JSON pointers so original supplied covers are preserved without repository binaries.

@@ -10,7 +10,10 @@ import { Reveal } from "@/components/Reveal";
 import { CookieBanner } from "@/components/CookieBanner";
 import { SITE, TESTIMONIALS } from "@/config/site";
 import { supabase } from "@/integrations/supabase/client";
-import bundle from "@/assets/covers-bundle.jpg";
+import bundle from "@/assets/pakiet-cover.jpeg.asset.json";
+import formalnosciCover from "@/assets/formalnosci-cover.png.asset.json";
+import pieniadzeCover from "@/assets/pieniadze-cover.png.asset.json";
+import pracaCover from "@/assets/praca-cover.png.asset.json";
 
 const TITLE = "Opiekun bez paniki – poradniki dla opiekunów rodzica z demencją";
 const DESC = "3 praktyczne poradniki, które przeprowadzą Cię krok po kroku przez formalności, pieniądze i pracę, gdy rodzic choruje na demencję. Bez prawniczego żargonu.";
@@ -33,7 +36,7 @@ const BOOKS = [
   {
     title: "Kto podpisze za mamę?",
     tagline: "Formalności i decyzje, zanim będzie za późno",
-    tone: "bg-navy text-navy-foreground",
+    cover: formalnosciCover.url,
     items: [
       "Pełnomocnictwo u notariusza krok po kroku: co wpisać, ile kosztuje, jak przygotować wizytę",
       "Pełnomocnictwo do konta w banku i jak sprawić, żeby bank je honorował",
@@ -46,7 +49,7 @@ const BOOKS = [
   {
     title: "Pieniądze na opiekę",
     tagline: "Świadczenia, ulgi i koszty opieki – bez zgadywania",
-    tone: "bg-gold-soft text-foreground",
+    cover: pieniadzeCover.url,
     items: [
       "Mapa świadczeń: dodatek pielęgnacyjny, świadczenie wspierające, zasiłki, bon senioralny",
       "Orzeczenia i komisje: jak się przygotować i jak skutecznie się odwołać",
@@ -59,7 +62,7 @@ const BOOKS = [
   {
     title: "Między etatem a opieką",
     tagline: "Jak opiekować się rodzicem i nie stracić pracy",
-    tone: "bg-sage text-accent-foreground",
+    cover: pracaCover.url,
     items: [
       "Twoje prawa w pracy: urlop opiekuńczy, zwolnienie z powodu siły wyższej, praca zdalna",
       "Jak rozmawiać z szefem i gotowe wzory wniosków",
@@ -144,10 +147,14 @@ function BuyLink({ children, variant = "cta" as const }: { children: ReactNode; 
 
 function Cover({ book }: { book: (typeof BOOKS)[number] }) {
   return (
-    <div className={`flex aspect-[3/4] w-28 shrink-0 flex-col justify-between rounded-lg p-3 shadow-lift ${book.tone}`}>
-      <span className="text-[10px] uppercase tracking-widest opacity-70">{SITE.brand}</span>
-      <span className="font-display text-sm leading-tight">{book.title}</span>
-    </div>
+    <img
+      src={book.cover}
+      alt={`Okładka poradnika „${book.title}”`}
+      width={1024}
+      height={1536}
+      loading="lazy"
+      className="aspect-[2/3] w-28 shrink-0 object-contain"
+    />
   );
 }
 
@@ -216,7 +223,7 @@ function Index() {
             <p className="mt-4 text-sm text-muted-foreground">PDF • natychmiast na e-mail • czytasz na telefonie lub drukujesz</p>
           </Reveal>
           <Reveal delay={150}>
-            <img src={bundle} alt="Okładki trzech poradników Opiekun bez paniki" width={1280} height={1024} className="w-full rounded-3xl shadow-lift" />
+            <img src={bundle.url} alt="Okładki trzech poradników Opiekun bez paniki" width={1188} height={1426} className="mx-auto w-full max-w-md rounded-3xl object-contain" />
           </Reveal>
         </div>
       </section>
@@ -272,7 +279,7 @@ function Index() {
           {BOOKS.map((b, i) => (
             <Reveal key={b.title} delay={i * 100}>
               <article className="h-full rounded-3xl bg-card p-6 shadow-soft md:p-8">
-                <div className="flex items-end gap-4">
+                <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end lg:flex-col lg:items-start">
                   <Cover book={b} />
                   <div>
                     <h3 className="text-2xl">{b.title}</h3>
