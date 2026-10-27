@@ -343,7 +343,8 @@ function Index() {
               <h3 className="text-2xl md:text-3xl">Pakiet 3 poradników</h3>
               <p className="mt-3 flex items-baseline gap-3">
                 <span className="font-display text-4xl md:text-5xl">{SITE.bundlePrice} zł</span>
-                <s className="text-lg text-muted-foreground">{SITE.singleSum} zł</s>
+                <s className="text-lg text-muted-foreground">{SITE.bundleOldPrice} zł</s>
+                <span className="rounded-full bg-accent px-3 py-0.5 text-sm font-semibold text-accent-foreground">Przecena</span>
               </p>
               <ul className="mt-6 space-y-3">
                 {BOOKS.map((b) => <li key={b.title} className="flex gap-3 font-medium"><Tick />{b.title}</li>)}
@@ -357,9 +358,12 @@ function Index() {
                 <div className="flex items-center justify-between gap-4 rounded-2xl border bg-card p-5">
                   <div>
                     <h3 className="text-lg">{b.title}</h3>
-                    <p className="font-display text-xl">{SITE.singlePrice} zł</p>
+                    <p className="flex items-baseline gap-2">
+                      <span className="font-display text-xl">{SITE.singlePrice} zł</span>
+                      <s className="text-sm text-muted-foreground">{SITE.singleOldPrice} zł</s>
+                    </p>
                   </div>
-                  <Button asChild variant="ctaOutline" size="lg"><a href={SITE.paymentLink}>Kup</a></Button>
+                  <Button asChild variant="ctaOutline" size="lg"><a href={b.link}>Kup</a></Button>
                 </div>
               </Reveal>
             ))}
