@@ -10,3 +10,5 @@
 <!-- LOVABLE:END -->
 
 - Keep uploaded book artwork in Lovable Assets and reference its JSON pointers so original supplied covers are preserved without repository binaries.
+- GitHub Pages builds are opt-in through GITHUB_PAGES and prerender all public pages into dist/client; the workflow publishes only this static directory to gh-pages because GitHub Pages cannot run the server bundle.
+- Use Vite's BASE_URL for router and local public asset paths so repository-subpath hosting works while Lovable hosting remains rooted at /.
