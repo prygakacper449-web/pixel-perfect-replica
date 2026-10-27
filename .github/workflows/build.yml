@@ -1,31 +1,73 @@
-name: Build Automatically
+name: Build and deploy to gh-pages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.13'
 
       - name: Install dependencies
-        run: npm install
+        run: bun install --frozen-lockfile
+
+      - name: Determine GitHub Pages base path
+        env:
+          CUSTOM_BASE_PATH: ${{ vars.PAGES_BASE_PATH }}
+        run: |
+          REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+          if [ -n "$CUSTOM_BASE_PATH" ]; then
+            BASE_PATH="$CUSTOM_BASE_PATH"
+          elif [ "${REPOSITORY_NAME,,}" = "${GITHUB_REPOSITORY_OWNER,,}.github.io" ]; then
+            BASE_PATH="/"
+          else
+            BASE_PATH="/$REPOSITORY_NAME/"
+          fi
+          echo "PAGES_BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
 
       - name: Build the project
-        run: npm run build
+        env:
+          GITHUB_PAGES: 'true'
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          VITE_SUPABASE_PROJECT_ID: ${{ vars.VITE_SUPABASE_PROJECT_ID }}
+        run: bun run build
+
+      - name: Check static pages
+        run: |
+          for PAGE in index.html kontakt/index.html regulamin/index.html polityka-prywatnosci/index.html; do
+            test -s "dist/client/$PAGE" || { echo "Missing static page: $PAGE"; exit 1; }
+          done
+          touch dist/client/.nojekyll
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_branch: gh-pages
+          publish_dir: ./dist/client
+          enable_jekyll: false
