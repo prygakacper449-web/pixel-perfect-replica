@@ -37,6 +37,7 @@ const BOOKS = [
     title: "Kto podpisze za mamę?",
     tagline: "Formalności i decyzje, zanim będzie za późno",
     cover: formalnosciCover.url,
+    link: "https://www.naffy.io/opiekunbezpaniki/kto-podpisze-za-mame-pelnomocnictwa-bank-i-sprawy-prawne-gdy-rodzic-przestaje-rozumiec-dokument-ujw",
     items: [
       "Pełnomocnictwo u notariusza krok po kroku: co wpisać, ile kosztuje, jak przygotować wizytę",
       "Pełnomocnictwo do konta w banku i jak sprawić, żeby bank je honorował",
@@ -50,6 +51,7 @@ const BOOKS = [
     title: "Pieniądze na opiekę",
     tagline: "Świadczenia, ulgi i koszty opieki – bez zgadywania",
     cover: pieniadzeCover.url,
+    link: "https://www.naffy.io/opiekunbezpaniki/pieniadze-na-opieke-swiadczenia-ulgi-i-realne-koszty-dps-u-lub-opiekunki-vqi",
     items: [
       "Mapa świadczeń: dodatek pielęgnacyjny, świadczenie wspierające, zasiłki, bon senioralny",
       "Orzeczenia i komisje: jak się przygotować i jak skutecznie się odwołać",
@@ -63,6 +65,7 @@ const BOOKS = [
     title: "Między etatem a opieką",
     tagline: "Jak opiekować się rodzicem i nie stracić pracy",
     cover: pracaCover.url,
+    link: "https://www.naffy.io/opiekunbezpaniki/miedzy-etatem-a-opieka-jak-opiekowac-sie-rodzicem-z-demencja-i-nie-stracic-pracy-ani-siebie-joj",
     items: [
       "Twoje prawa w pracy: urlop opiekuńczy, zwolnienie z powodu siły wyższej, praca zdalna",
       "Jak rozmawiać z szefem i gotowe wzory wniosków",
