@@ -8,6 +8,8 @@ export const Route = createFileRoute("/polityka-prywatnosci")({
       { name: "description", content: "Jak przetwarzamy Twoje dane osobowe i pliki cookie." },
       { property: "og:title", content: "Polityka prywatności – Opiekun bez paniki" },
       { property: "og:description", content: "Jak przetwarzamy Twoje dane osobowe i pliki cookie." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

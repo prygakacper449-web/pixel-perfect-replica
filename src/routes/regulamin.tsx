@@ -8,6 +8,8 @@ export const Route = createFileRoute("/regulamin")({
       { name: "description", content: "Regulamin sklepu Opiekun bez paniki." },
       { property: "og:title", content: "Regulamin – Opiekun bez paniki" },
       { property: "og:description", content: "Regulamin sklepu Opiekun bez paniki." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (
