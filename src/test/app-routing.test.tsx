@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { routeTree } from "@/routeTree.gen";
 import { getRouter } from "@/router";
@@ -17,15 +17,11 @@ describe("App routing", () => {
   });
 
   it("keeps every public page under the GitHub Pages repository base path", () => {
-    vi.stubEnv("BASE_URL", "/opiekun-bez-paniki/");
-    try {
       const router = getRouter();
+      router.update({ basepath: "/opiekun-bez-paniki/" });
       for (const path of ["/", "/kontakt", "/regulamin", "/polityka-prywatnosci"]) {
         expect(router.matchRoutes(`/opiekun-bez-paniki${path}`).at(-1)?.routeId).toBe(path);
         expect(router.buildLocation({ to: path }).href).toBe(`/opiekun-bez-paniki${path}`);
       }
-    } finally {
-      vi.unstubAllEnvs();
-    }
   });
 });
