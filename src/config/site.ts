@@ -1,10 +1,13 @@
 // ===== Edit these values to configure the page =====
 export const SITE = {
   brand: "Opiekun bez paniki",
-  paymentLink: "#cennik", // [LINK DO PŁATNOŚCI / sklepu] – replace with Stripe/shop URL
-  bundlePrice: "[CENA PAKIETU]",
-  singlePrice: "[CENA POJEDYNCZEGO]",
-  singleSum: "[SUMA]",
+  // Pakiet 3 poradników (przecena: 149 zł -> 99 zł)
+  paymentLink: "https://www.naffy.io/opiekunbezpaniki/rodzic-zapomina-ty-wiesz-co-robic-pakiet-3-poradnikow-7ce",
+  bundlePrice: "99",
+  bundleOldPrice: "149",
+  // Pojedynczy poradnik (przecena: 79 zł -> 49 zł)
+  singlePrice: "49",
+  singleOldPrice: "79",
   contactEmail: "[TWÓJ E-MAIL KONTAKTOWY]",
   tiktok: "#", // [LINK TIKTOK]
   instagram: "#", // [LINK INSTAGRAM]
