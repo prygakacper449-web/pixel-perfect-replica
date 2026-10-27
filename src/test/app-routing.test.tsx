@@ -17,11 +17,11 @@ describe("App routing", () => {
   });
 
   it("keeps every public page under the GitHub Pages repository base path", () => {
-      const router = getRouter();
-      router.update({ basepath: "/opiekun-bez-paniki/" });
-      for (const path of ["/", "/kontakt", "/regulamin", "/polityka-prywatnosci"]) {
-        expect(router.matchRoutes(`/opiekun-bez-paniki${path}`).at(-1)?.routeId).toBe(path);
-        expect(router.buildLocation({ to: path }).href).toBe(`/opiekun-bez-paniki${path}`);
-      }
+    const router = getRouter();
+    router.update({ basepath: "/opiekun-bez-paniki/", context: router.options.context });
+    for (const path of ["/", "/kontakt", "/regulamin", "/polityka-prywatnosci"]) {
+      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path);
+      expect(router.buildLocation({ to: path }).href).toBe(`/opiekun-bez-paniki${path}`);
+    }
   });
 });
